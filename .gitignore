@@ -1,0 +1,30 @@
+# macOS metadata
+.DS_Store
+**/.DS_Store
+
+# Python environments and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Image-to-video source clips and extracted frames
+i2v-output/
+
+# Generated and intermediate image-processing artifacts
+generated/
+slice-output*/
+transparent-output*/
+recovered-output*/
+normalized-output*/
+anchors/*
+
+# Temporary working files
+tmp/
+temp/
+*.tmp
+*.log
+
