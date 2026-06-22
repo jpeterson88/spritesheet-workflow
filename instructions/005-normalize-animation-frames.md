@@ -13,6 +13,10 @@ Convert background-removed animation frames into stable, game-ready assets with:
 
 Normalization must remove accidental image-generation drift without erasing intentional squash, stretch, recoil, or motion smears.
 
+When invoked from the spritesheet pipeline, this is the second user review
+checkpoint. Iterate in this same stage until the normalized frames and GIF are
+approved, then continue to step 006.
+
 ## Required normalization sequence
 
 Before promoting an animation into game assets:
@@ -37,7 +41,8 @@ Ask the user to provide or confirm:
 - `SOURCE_SHEET`: original spritesheet when frames still need recovery
 - `INPUT_DIR`: folder containing ordered transparent PNG frames when recovery
   and background removal are already complete
-- `OUTPUT_DIR`: folder for normalized frames
+- `OUTPUT_DIR`: folder for normalized frames; default
+  `work/<animation-name>/005-normalized/frames`
 - `REFERENCE_IMAGE` or `REFERENCE_DIR`: approved/completed character asset used
   to establish scale and anchor conventions
 - `CANVAS_WIDTH`: runtime frame width
@@ -85,6 +90,10 @@ Do not guess canvas dimensions, atlas layout, or the approved scale reference wh
 - Do not overwrite existing outputs unless the user explicitly permits it.
 - Preserve frame count and animation order.
 - Rebuild the atlas using the requested grid without resampling normalized frames.
+- Store the contact sheet and GIF in
+  `work/<animation-name>/005-normalized/`.
+- Reuse this directory for every correction. Do not create `pass-*`,
+  `corrected`, or `v2` directories.
 
 ## Why one animation-wide scale factor matters
 
@@ -321,6 +330,24 @@ duration_ms = round(1000 / FPS)
 ```
 
 The GIF is for inspection only. PNG frames and the PNG atlas remain the production assets.
+
+## User review and iteration
+
+After creating the normalized frames and preview:
+
+1. Present the GIF and, when useful, the contact sheet.
+2. Ask the user whether the animation is approved or what should change.
+3. Keep iterating in `005-normalized` until the user approves it.
+4. The user may remove unwanted frames, request frame reordering, adjust
+   anchors, clean borders, fix chroma bleed, or repair clipped/bleeding frames.
+5. After every change, rebuild the GIF from the current normalized frame set.
+6. Do not keep superseded GIFs, reports, atlases, or discarded frames in
+   alternate folders. If temporary backup is needed during an edit, keep it
+   inside the current workspace and delete it before presenting the revision.
+7. Do not run step 006 until the user explicitly approves the current GIF.
+
+Once approved, run `instructions/006-finalize-animation-assets.md`
+automatically.
 
 ## Reference implementation
 
@@ -634,6 +661,7 @@ Report:
 - contact-sheet path
 - GIF path
 - any clipping, scale, alpha, or anchor warnings
+- whether the user approved the preview and step 006 was started
 
 ## Important limitations
 

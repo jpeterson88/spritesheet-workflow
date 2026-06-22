@@ -20,6 +20,10 @@ slice-output*/
 transparent-output*/
 recovered-output*/
 normalized-output*/
+output/*
+work/
+
+# User-provided anchors are inputs and should not be removed by pipeline cleanup
 anchors/*
 
 # Temporary working files
@@ -27,4 +31,3 @@ tmp/
 temp/
 *.tmp
 *.log
-

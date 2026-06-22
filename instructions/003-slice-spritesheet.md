@@ -4,12 +4,16 @@
 
 Slice one spritesheet into evenly sized individual PNG frames. Validate the sheet before slicing, preserve the source image, and write the frames in animation order.
 
+When invoked from step 001, run automatically after spritesheet approval and
+continue directly to step 004 after validation.
+
 ## Required inputs
 
 Determine these values before processing, ask the user to provide them:
 
 - `INPUT_SHEET`: path to the spritesheet
-- `OUTPUT_DIR`: directory for the extracted frames
+- `OUTPUT_DIR`: directory for the extracted frames; default
+  `work/<animation-name>/003-sliced`
 - `COLUMNS`: number of columns in the sheet
 - `ROWS`: number of rows in the sheet
 - `FRAME_PREFIX`: output filename prefix, such as `dash-east`
@@ -28,6 +32,8 @@ If the column or row count is not provided and cannot be determined reliably, as
 - Do not resize, resample, trim, rotate, or otherwise alter individual frames.
 - Create the output directory if it does not exist.
 - Do not overwrite existing frames unless the user explicitly permits it.
+- For pipeline retries, clear and reuse only the current animation's
+  `003-sliced` directory instead of creating a new pass/version directory.
 
 ## Procedure
 
@@ -138,6 +144,18 @@ After slicing:
 4. Confirm that numbering proceeds left to right and then top to bottom.
 5. Visually inspect the first, middle, and final frames for clipping or incorrect boundaries.
 6. Report the source dimensions, grid dimensions, frame dimensions, frame count, and output directory.
+
+## Automatic handoff
+
+If step 001 started the pipeline and validation succeeds, do not ask the user
+for approval here. Run step 004 with:
+
+```text
+INPUT_DIR = work/<animation-name>/003-sliced
+OUTPUT_DIR = work/<animation-name>/004-transparent
+```
+
+Stop only on validation failure or missing information that cannot be inferred.
 
 ## Important limitation
 

@@ -6,12 +6,16 @@ Remove a flat chroma-key background from every supported image in an input folde
 
 The default key color is bright green `#00FF00`. Preserve the source images.
 
+When invoked from the spritesheet pipeline, run automatically after step 003
+and continue directly to step 005 after validation.
+
 ## Required inputs
 
 Determine these values before processing, ask the user to provide them:
 
 - `INPUT_DIR`: folder containing source images
-- `OUTPUT_DIR`: folder for transparent PNG results
+- `OUTPUT_DIR`: folder for transparent PNG results; default
+  `work/<animation-name>/004-transparent`
 - `KEY_COLOR`: background color to remove; default `(0, 255, 0)`
 - `TOLERANCE`: allowed per-channel color difference; default `20`
 
@@ -30,6 +34,8 @@ Use a low tolerance for a perfectly uniform background. Raise it cautiously when
 - Do not overwrite existing output files unless the user explicitly permits it.
 - Keep original image dimensions.
 - Report failed files without discarding successful results.
+- For pipeline retries, clear and reuse only the current animation's
+  `004-transparent` directory instead of creating pass/version directories.
 
 ## Procedure
 
@@ -174,6 +180,19 @@ After processing:
 4. Inspect the character outline for green fringe or accidentally removed character colors.
 5. Compare the number of source images with the number processed, skipped, and failed.
 6. Report the input folder, output folder, key color, tolerance, and result counts.
+
+## Automatic handoff
+
+If step 001 started the pipeline and validation succeeds, do not ask the user
+for approval here. Run step 005 with:
+
+```text
+INPUT_DIR = work/<animation-name>/004-transparent
+OUTPUT_DIR = work/<animation-name>/005-normalized/frames
+```
+
+Stop only if background removal fails validation. Green fringe, lost subject
+colors, or opaque corners must be corrected before normalization.
 
 ## Edge-quality note
 
