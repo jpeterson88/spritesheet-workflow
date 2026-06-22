@@ -21,7 +21,7 @@ Read and follow the applicable file in `instructions/`:
 
 - Spritesheet generation from anchor images:
   `001-generate-spritesheet.md`
-- Image-to-video animation:
+- Image-to-video animation (Currently non-functioning):
   `002-generate-animation-i2v.md`
 - Spritesheet slicing:
   `003-slice-spritesheet.md`

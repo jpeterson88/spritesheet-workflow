@@ -1,5 +1,7 @@
 # Generate a 2D Animation with Image-to-Video
 
+## NOTE: This instruction is currently non functional. Please report to user they try to use
+
 ## Objective
 
 Generate a short image-to-video clip from one approved character anchor, extract a clean contiguous animation interval, and save an exact number of ordered PNG frames for the existing background-removal and normalization pipeline.
