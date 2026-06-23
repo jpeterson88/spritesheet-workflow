@@ -51,7 +51,9 @@ Common roles are:
 
 One image may serve more than one role when appropriate. Never treat every
 reference as equally authoritative, and never invent references the user did
-not provide.
+not provide. Treat identity as authoritative, pose as secondary, style as
+medium/detail only, and scale as gameplay size only. If those roles conflict,
+preserve the higher-priority reference.
 
 State exactly what to preserve and what not to copy from each image.
 
@@ -199,10 +201,14 @@ request-specific prohibitions and these baseline atlas constraints:
 - no camera or perspective changes
 - no positional drift when movement is engine-controlled
 - no extra limbs, changed identity, or unrequested accessories
+- no altered facial structure, palette, outline language, costume geometry, or
+  rendering medium drift
 - no scenery, floor, props, UI, or environmental elements
 - no cast shadow unless requested
 - no detached particles, trails, afterimages, or VFX unless requested
 - no unrequested rendering-style changes
+- no accepting a sheet that meaningfully drifts from the approved anchor
+  images; regenerate instead
 
 Name direction-specific mistakes explicitly, such as “no westward, vertical,
 or diagonal motion” for an eastward action.

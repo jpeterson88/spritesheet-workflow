@@ -12,6 +12,8 @@ Convert background-removed animation frames into stable, game-ready assets with:
 - a rebuilt atlas, contact sheet, and animated preview
 
 Normalization must remove accidental image-generation drift without erasing intentional squash, stretch, recoil, or motion smears.
+Normalization may translate, scale, crop, alpha-clean, and re-anchor. It may
+not reinterpret the subject's identity or rendering language to hide drift.
 
 When invoked from the spritesheet pipeline, this is the second user review
 checkpoint. Iterate in this same stage until the normalized frames and GIF are
@@ -30,6 +32,8 @@ Before promoting an animation into game assets:
    inside each runtime cell.
 5. Preserve the requested atlas dimensions, frame count, and frame order.
 6. Create a contact sheet and GIF preview at the real runtime frame size.
+7. Treat any identity or rendering-language drift as a rejection, not as a
+   correction target.
 
 Do not normalize files that only appear transparent against a colored
 background.
@@ -87,6 +91,11 @@ Do not guess canvas dimensions, atlas layout, or the approved scale reference wh
 - Never stretch width and height independently.
 - Never crop visible subject pixels silently.
 - Stop if the normalized subject cannot fit the target canvas.
+- Stop if fixing a frame would require changing facial structure, palette,
+  silhouette language, outline style, or costume geometry instead of simple
+  normalization.
+- Do not use normalization to rescue a failed generation. If the frame has
+  drifted outside the approved anchor identity, return to step 001.
 - Do not overwrite existing outputs unless the user explicitly permits it.
 - Preserve frame count and animation order.
 - Rebuild the atlas using the requested grid without resampling normalized frames.
