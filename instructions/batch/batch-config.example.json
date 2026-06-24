@@ -1,0 +1,32 @@
+{
+  "animation_name": "curse-cast",
+  "batch_name": "curse-cast-batch",
+  "subject": "curse caster",
+  "action": "cast curse",
+  "direction": "east",
+  "candidate_count": 8,
+  "shortlist_count": 4,
+  "max_rounds": 3,
+  "fail_threshold": 60,
+  "seed_strategy": "incremental",
+  "background_color": "#00FF00",
+  "base_prompt_text": "A cursed mage winds up both hands, gathering dark energy into a spell circle before casting.",
+  "generate_command": "",
+  "anchor_images": [
+    "anchors/anchor.png",
+    "anchors/directional-anchor.png"
+  ],
+  "columns": 4,
+  "rows": 4,
+  "prompt_variants": [
+    "balanced motion, conservative silhouette",
+    "slightly stronger anticipation, still readable",
+    "cleaner pose separation, modest smear",
+    "higher energy, stronger recoil",
+    "tighter silhouette, restrained deformation",
+    "more expressive timing, stable identity",
+    "reduced smear, better body clarity",
+    "greater pose variation, same identity"
+  ],
+  "notes": "Starter example for batch automation."
+}

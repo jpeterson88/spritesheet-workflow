@@ -4,6 +4,9 @@ This repository defines a staged workflow for turning user-provided anchor
 images and an animation request into an approved GIF and production
 spritesheet.
 
+For batch prefiltering and multi-variant review, see
+`instructions/batch/README.md`.
+
 ## Spritesheet workflow
 
 ```text
