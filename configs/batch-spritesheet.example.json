@@ -1,0 +1,20 @@
+{
+  "animation_name": "example-animation",
+  "prompt_path": "prompts/curse-cast.md",
+  "generation_count": 6,
+  "keep_count": 3,
+  "frame_count": 12,
+  "grid": {
+    "columns": 4,
+    "rows": 3
+  },
+  "frame_size": {
+    "width": 512,
+    "height": 512
+  },
+  "background_color": "#00FF00",
+  "fps": 12,
+  "background_tolerance": 20,
+  "alpha_threshold": 8,
+  "allow_overwrite": false
+}

@@ -38,3 +38,42 @@ output/<animation-name>/
 ├── <animation-name>.gif
 └── <animation-name>-spritesheet.png
 ```
+
+## Batch spritesheet workflow
+
+Use the instructions in `instructions/batch/` when the user wants multiple
+spritesheets generated, ranked, and finalized from one config. The batch
+workflow preserves the normal single-sheet workflow above.
+
+```text
+001 Batch create spritesheets
+        ↓
+002 Batch stack rank spritesheets
+        ↓
+003 Batch process ranked candidates
+```
+
+Batch inputs are provided as JSON. See:
+
+```text
+configs/batch-spritesheet.example.json
+```
+
+Batch work is kept under:
+
+```text
+disposable/batch/<animation-name>/
+```
+
+Final ranked outputs are written to:
+
+```text
+output/batch/<animation-name>/<rank-number>/
+├── <animation-name>.gif
+└── <animation-name>-spritesheet.png
+```
+
+Batch generation still uses the `001` prompt construction and validation
+criteria, but it does not pause for user review on each generated candidate.
+Rank candidates first, then process only the kept candidates through
+`003 -> 006`. Do not automatically clean up `disposable/batch`.

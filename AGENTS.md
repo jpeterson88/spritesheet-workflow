@@ -31,10 +31,20 @@ Read and follow the applicable file in `instructions/`:
   `005-normalize-animation-frames.md`
 - Final spritesheet packaging and cleanup:
   `006-finalize-animation-assets.md`
+- Batch spritesheet generation, ranking, and finalization:
+  `batch/001-batch-create-spritesheets.md`,
+  `batch/002-batch-stack-rank-spritesheets.md`, and
+  `batch/003-batch-process-ranked-candidates.md`
 
 For a complete spritesheet request, start at step 001 and continue through the
 full workflow. Do not treat each instruction as an unrelated standalone task
 unless the user explicitly requests only that operation.
+
+For a batch spritesheet request, follow the instruction under
+`instructions/batch/` in numbered order. The batch flow generates every
+requested candidate before ranking, ranks candidates before `003 -> 006`, and
+does not pause for user review until the top-ranked GIFs and spritesheets are
+finalized.
 
 ## Agent operating rules
 
@@ -60,6 +70,10 @@ unless the user explicitly requests only that operation.
 - Preserve all source images in `anchors/`.
 - Store temporary artifacts only under `work/<animation-name>/`.
 - Store approved deliverables only under `output/<animation-name>/`.
+- For batch workflows, store disposable artifacts only under
+  `disposable/batch/<animation-name>/`.
+- For batch workflows, store finalized ranked deliverables only under
+  `output/batch/<animation-name>/<rank-number>/`.
 - Reuse each numbered stage directory during iteration.
 - Do not create retry directories named `pass-*`, `corrected`, `v2`, or
   similar.
