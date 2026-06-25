@@ -96,6 +96,12 @@ For every candidate, follow the prompt-writing rules in
 - Preserve all config requirements across every generation attempt.
 - Use the same prompt path, anchor roles, output spec, frame count, grid, frame
   size, background color, and hard constraints for every candidate.
+- Avoid chroma-matted edges. If a candidate is assembled locally from
+  transparent or generated elements, compose the artwork on real alpha first,
+  then fill only fully transparent pixels with the configured background color.
+  Do not blend semi-transparent subject edges against `#00FF00`; keep those
+  edge RGB values in the subject palette so deterministic background removal
+  does not leave a green fringe.
 - Save each candidate under its manifest path:
 
 ```text
@@ -118,7 +124,10 @@ Before moving to step 002:
    ```
 
 4. Inspect actual image artifacts when anything looks questionable.
-5. Do not run deterministic cleanup here.
+5. For chroma-key candidates, simulate or audit key removal on a dark
+   background and reject candidates with visible chroma-colored fringe on
+   foreground pixels.
+6. Do not run deterministic cleanup here.
 
 ## Handoff
 

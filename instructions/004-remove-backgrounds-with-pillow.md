@@ -196,4 +196,15 @@ colors, or opaque corners must be corrected before normalization.
 
 ## Edge-quality note
 
-The basic script makes matching pixels fully transparent. It does not create a soft alpha transition or remove green spill from antialiased edges. If visible green fringing remains, use a dedicated chroma-key routine with soft-matte and despill processing rather than repeatedly increasing `TOLERANCE`; a high tolerance may erase colors within the subject.
+The basic script makes matching pixels fully transparent. It does not create a
+soft alpha transition or remove green spill from antialiased edges. If visible
+green fringing remains, use a dedicated chroma-key routine with soft-matte and
+despill processing rather than repeatedly increasing `TOLERANCE`; a high
+tolerance may erase colors within the subject.
+
+The cleanest fix is usually upstream: generate or assemble the source artwork
+with real alpha first, then put the chroma key only behind pixels that should be
+fully transparent. Semi-transparent subject edges should retain subject-colored
+RGB values instead of being blended against the key color. After removal, audit
+visible pixels on a dark background for chroma-colored fringe before continuing
+to normalization.

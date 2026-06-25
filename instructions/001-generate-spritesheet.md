@@ -96,6 +96,13 @@ Do not request dimensions that conflict with the grid.
 When the game engine supplies movement, tell the generator to keep the subject
 in the same cell-relative position and animate pose or deformation only.
 
+For chroma-key spritesheets, avoid green-matted edges. If a sheet is assembled
+locally from transparent or generated elements, compose the subject on real
+alpha first, then write the chroma background only into fully transparent
+pixels. Semi-transparent edge pixels must keep subject-colored RGB values, not
+RGB blended with `#00FF00`. This keeps later background removal from leaving a
+green halo.
+
 ## 4. Describe the subject, action, and direction
 
 Write a concrete animation direction section that answers:
@@ -268,7 +275,13 @@ Validate:
 6. Camera, scale, anchor, and baseline are stable.
 7. No subject crosses a cell boundary.
 8. The background is uniformly removable.
-9. No forbidden text, guides, scenery, VFX, or artifacts appear.
+9. Semi-transparent subject edges are not matted against the chroma color.
+10. No forbidden text, guides, scenery, VFX, or artifacts appear.
+
+When the source uses a chroma background, preview or audit a cleanup simulation
+on a dark background before approval. If visible chroma-colored pixels remain
+on the subject after simulated key removal, reject and regenerate or reassemble
+the sheet before passing it downstream.
 
 Reject and regenerate a malformed sheet rather than passing it downstream.
 
