@@ -438,7 +438,16 @@ def color_matches(
     key: tuple[int, int, int],
     tolerance: int,
 ) -> bool:
-    return all(abs(channel - target) <= tolerance for channel, target in zip(color, key))
+    if all(abs(channel - target) <= tolerance for channel, target in zip(color, key)):
+        return True
+
+    red, green, blue = color
+    key_red, key_green, key_blue = key
+    green_key = key_green > 200 and key_red < 40 and key_blue < 40
+    if green_key:
+        return green >= 100 and green - max(red, blue) >= 45
+
+    return False
 
 
 def normalize_frames(

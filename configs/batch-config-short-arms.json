@@ -1,6 +1,6 @@
 {
-  "animation_name": "cast-curse-001",
-  "prompt_path": "prompts/cast-curse-001.md",
+  "animation_name": "cast-curse-002",
+  "prompt_path": "prompts/cast-curse-002-short-arms.md",
   "generation_count": 8,
   "keep_count": 3,
   "frame_count": 16,
