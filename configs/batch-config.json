@@ -1,5 +1,5 @@
 {
-  "animation_name": "curse-vfx-001",
+  "animation_name": "curse-vfx-loop-001",
   "prompt_path": "prompts/curse-vfx-001.md",
   "generation_count": 8,
   "keep_count": 3,

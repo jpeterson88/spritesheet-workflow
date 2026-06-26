@@ -27,6 +27,7 @@ normalized-output*/
 output/*
 disposable/
 prompts/
+work/
 
 # User-provided anchors are inputs and should not be removed by pipeline cleanup
 anchors/*
